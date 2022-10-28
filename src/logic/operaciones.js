@@ -1,6 +1,6 @@
 import Big from "big.js";
 import operate from "./operate";
-import isNumber from "./IsNumbre";
+import isNumber from "./isNumber";
 
 export default function operaciones (estado, nombreDeBoton){
 
@@ -75,19 +75,30 @@ export default function operaciones (estado, nombreDeBoton){
         return {}
     }
 
-if (nombreDeBoton === "+/-") {
-    if(estado.siguiente) return {siguiente: (-1 * parseFloat(estado.siguiente).toString())}
+    if (nombreDeBoton === "+/-") {
+        if(estado.siguiente) return {siguiente: (-1 * parseFloat(estado.siguiente).toString())}
 
-    if (estado.total) return {total: -1 * parseFloat(estado.total).toString()}
+        if (estado.total) return {total: -1 * parseFloat(estado.total).toString()}
 
-    return {}
+         return {}
 
-}
+    }
 
-if(estado.operador)
+    if (estado.operador) {
+        return {
+            total: operate(estado.siguiente, estado.total, estado.operador),
+            siguiente: null,
+            operador: nombreDeBoton
+        } 
+    }
+    if (!estado.siguiente) return {operador: nombreDeBoton}
 
+        return {
+        total: estado.siguiente,
+        siguiente: null,
+        operador: nombreDeBoton
 
-
+    }
 
 }
 
