@@ -2,6 +2,7 @@ import Display from "./display"
 import PanelDeBotones from "./PanelDeBotones"
 import component from "react"
 import operaciones from "../logic/operaciones"
+import "./App.css"
 
 class App extends component {
 
@@ -16,7 +17,7 @@ handleClick =nombreDeBoton => this.setState(operaciones(this.state, nombreDeBoto
 
   render() {
   return (
-    <div>
+    <div className="comoponent-app"> 
     <h1> Bienvenidos</h1>
     <Display value={this.state.siguiente || this.state.total || "0"} />
     <PanelDeBotones clickHandle={this.clickHandle} />
